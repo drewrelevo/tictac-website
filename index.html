@@ -42,9 +42,29 @@
     }
     #status {
         position: absolute;
+        top: 618px;
+        left: 155px;
+    }
+    .restart-button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+        }
+        
+    button {
+        
+        position: absolute;
         top: 570px;
         left: 160px;
     }
+        
 </style>
 </head>
 
@@ -64,8 +84,13 @@
     <div class="cell" onclick="makeMove(8)"></div>
 </div>
 <div id="status"></div>
-
+<button class="restart-button" onclick="restartGame()">Restart</button> 
 <script>
+    
+    function restartGame() { 
+      location.reload(); //
+       }
+    
     let currentPlayer = 'X';
     let board = ['', '', '', '', '', '', '', '', ''];
     let winningCombos = [
