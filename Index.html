@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tic Tac Toe</title> 
+<style> 
+    body {
+        background-image: url('image.jpg'); 
+        background-size: cover; 
+        background-position: center; 
+        background-repeat: no-repeat; 
+        height: 100vh;
+        margin: 0;
+       display: flex; 
+       justify-content: center; 
+       align-items: center;  
+    }
+    
+    .board {
+        display: grid;
+        justify-content: center;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 2px;
+    }
+    .cell {
+        width: 100px;
+            height: 100px;
+            border: 2px solid black;
+            font-size: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+    }
+    h1 {
+        text-align: center;
+        position: absolute;
+        top: 100px;
+        left: 125px;
+    }
+    #status {
+        position: absolute;
+        top: 570px;
+        left: 160px;
+    }
+</style>
+</head>
+
+<body>
+    <body background = "image.jpg">
+<div><h1>Tic Tac Toe</h1></div>
+<div class="board" id="board">
+    
+    <div class="cell" onclick="makeMove(0)"></div>
+    <div class="cell" onclick="makeMove(1)"></div>
+    <div class="cell" onclick="makeMove(2)"></div>
+    <div class="cell" onclick="makeMove(3)"></div>
+    <div class="cell" onclick="makeMove(4)"></div>
+    <div class="cell" onclick="makeMove(5)"></div>
+    <div class="cell" onclick="makeMove(6)"></div>
+    <div class="cell" onclick="makeMove(7)"></div>
+    <div class="cell" onclick="makeMove(8)"></div>
+</div>
+<div id="status"></div>
+
+<script>
+    let currentPlayer = 'X';
+    let board = ['', '', '', '', '', '', '', '', ''];
+    let winningCombos = [
+       [0, 1, 2], [3, 4, 5], [6, 7, 8],
+       [0, 3, 6], [1, 4, 7], [2, 5, 8],
+       [0, 4, 8], [2, 4, 6]
+    ];
+
+    function makeMove(index) {
+        if (board[index] === '' && !checkWinner()) {
+            board[index] = currentPlayer;
+            document.getElementById('board').children[index].textContent = currentPlayer;
+            if (checkWinner()) {
+                document.getElementById('status').textContent = `Player ${currentPlayer} wins!`;
+            } else if (!board.includes('')) {
+                document.getElementById('status').textContent = "It's a draw!";
+            } else {
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                document.getElementById('status').textContent = `Player ${currentPlayer}'s turn`;
+            }
+        }
+    }
+
+    function checkWinner() {
+        for (let combo of winningCombos) {
+            let [a, b, c] = combo;
+            if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+                return true;
+            }
+        }
+        return false;
+    }
+</script>
+</body>
+</html>
